@@ -1,4 +1,3 @@
-% ³Ì¾ıÀ¼ 180210316
 %% 1
 close all
 syms n z
@@ -8,30 +7,30 @@ X1 = ztrans(x1);
 figure
 subplot(1,2,1)
 fplot(x1,[0 20]);
-title('sin(an)u(n)Ê±ÓòÍ¼Ïñ')
+title('sin(an)u(n)æ—¶åŸŸå›¾åƒ')
 subplot(1,2,2)
 fplot(X1,[-10 10],'-.*g');
 
-X1_theory = z*sin(a)/(z^2-2*z*cos(a)+1)     %ÀíÂÛÍÆµ¼Öµ
+X1_theory = z*sin(a)/(z^2-2*z*cos(a)+1)     %ç†è®ºæ¨å¯¼å€¼
 hold on
 fplot(X1_theory,[-20 20],'--or');
-legend('Ê¹ÓÃztransº¯Êı½á¹û','ÀíÂÛ¼ÆËã½á¹û')
-title('sin(an)u(n)µÄzÓòÍ¼Ïñ')
+legend('ä½¿ç”¨ztranså‡½æ•°ç»“æœ','ç†è®ºè®¡ç®—ç»“æœ')
+title('sin(an)u(n)çš„zåŸŸå›¾åƒ')
 
 x2 = (a^n)*find(n>0)
-% Ò²¿ÉÖ±½ÓĞ´³Éx2 = (a^n)
+% ä¹Ÿå¯ç›´æ¥å†™æˆx2 = (a^n)
 X2 = ztrans(x2)
 figure
 subplot(1,2,1)
 fplot(x2,[-10 10]);
-title('a^{n}u(n)Ê±ÓòÍ¼Ïñ')
+title('a^{n}u(n)æ—¶åŸŸå›¾åƒ')
 subplot(1,2,2)
 fplot(X2,[-10 10],'-.*g');
 hold on
-X2_theory = z/(z-a);                %ÀíÂÛÖµ
+X2_theory = z/(z-a);                %ç†è®ºå€¼
 fplot(X2_theory,[-10 10],'--or')
-legend('Ê¹ÓÃztransº¯Êı½á¹û','ÀíÂÛ¼ÆËã½á¹û')
-title('a^{n}u(n)µÄzÓòÍ¼Ïñ')
+legend('ä½¿ç”¨ztranså‡½æ•°ç»“æœ','ç†è®ºè®¡ç®—ç»“æœ')
+title('a^{n}u(n)çš„zåŸŸå›¾åƒ')
 
 
 
@@ -41,13 +40,13 @@ title('a^{n}u(n)µÄzÓòÍ¼Ïñ')
 a = [1 -1 -2];
 b = [1 1.5 -1];
 subplot(3,1,1)
-zplane(a,b);                %Áã¼«µã·Ö²¼Í¼
+zplane(a,b);                %é›¶æç‚¹åˆ†å¸ƒå›¾
 title('pole and zero')
-h = impz(a,b);              %µ¥Î»ÑùÖµÏìÓ¦
+h = impz(a,b);              %å•ä½æ ·å€¼å“åº”
 subplot(3,1,2)
 stem(h);
 title('impulse respone');
-[H,w] = freqz(a,b);         %ÆµÏìÌØĞÔÇúÏß
+[H,w] = freqz(a,b);         %é¢‘å“ç‰¹æ€§æ›²çº¿
 subplot(3,1,3)
 plot(w/pi,abs(H));
 xlabel('frequency\omega');
@@ -60,11 +59,11 @@ b = [1 -1.1 0.7];
 subplot(3,1,1)
 zplane(a,b);
 title('pole and zero')
-h = impz(a,b);          %Áã¼«µã·Ö²¼Í¼
+h = impz(a,b);          %é›¶æç‚¹åˆ†å¸ƒå›¾
 subplot(3,1,2)
-stem(h);                %µ¥Î»ÑùÖµÏìÓ¦
+stem(h);                %å•ä½æ ·å€¼å“åº”
 title('impulse respone');
-[H,w] = freqz(a,b);     %ÆµÏìÌØĞÔÇúÏß
+[H,w] = freqz(a,b);     %é¢‘å“ç‰¹æ€§æ›²çº¿
 subplot(3,1,3)
 plot(w/pi,abs(H));
 xlabel('frequency\omega');
