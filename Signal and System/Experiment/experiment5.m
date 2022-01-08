@@ -1,62 +1,59 @@
-%ÐÅºÅÓëÏµÍ³ÊµÑéÎå  
-%180210316 ³Ì¾ýÀ¼
-
-%%
-%Ë«±ßÖ¸ÊýÐÅºÅÆµÆ×Í¼
+%ä¿¡å·ä¸Žç³»ç»Ÿå®žéªŒäº”  
+%åŒè¾¹æŒ‡æ•°ä¿¡å·é¢‘è°±å›¾
 % f1 = @(t) exp(-abs(t))
 syms t
 f1 = exp(-abs(t))
 F1 = fourier(f1)
 subplot(1,2,1)
-fplot(f1)     %tÖá¶¨ÒåÓòÎª[-5,5]Îª¹éÊ¡ÉèÖÃ
+fplot(f1)     %tè½´å®šä¹‰åŸŸä¸º[-5,5]ä¸ºå½’çœè®¾ç½®
 axis([-5 5 0 3])
-title('two¨Csided exponential signal');xlabel('t') ;ylabel('f(t)') %¾ØÐÎ²¨µÄÆµÆ×
+title('twoâ€“sided exponential signal');xlabel('t') ;ylabel('f(t)') %çŸ©å½¢æ³¢çš„é¢‘è°±
 subplot(1,2,2)
 fplot(abs(F1)) 
 axis([-10 10 0 3])
-title('amplitude spectrum of two¨Csided exponential signal');xlabel('\omega');ylabel('|F(\omega)|')   %¾ØÐÎ²¨µÄÆµÆ×
+title('amplitude spectrum of twoâ€“sided exponential signal');xlabel('\omega');ylabel('|F(\omega)|')   %çŸ©å½¢æ³¢çš„é¢‘è°±
 
 %%
-%Èý½ÇÂö³åµÄÏàÆµÌØÐÔ
-%·¨Ò»£ºÀûÓÃÊý×é´æ´¢F(w)
+%ä¸‰è§’è„‰å†²çš„ç›¸é¢‘ç‰¹æ€§
+%æ³•ä¸€ï¼šåˆ©ç”¨æ•°ç»„å­˜å‚¨F(w)
 t = -3:0.01:3;
 w = -30:0.01:30;
 tau = 1;
 E = 1;
-f = tripuls(t,tau,0);       %ÓÃtripulsº¯Êý»­³öÈý½Ç²¨
+f = tripuls(t,tau,0);       %ç”¨tripulså‡½æ•°ç”»å‡ºä¸‰è§’æ³¢
 plot(t,f)
-F = f*exp(-j*t'*w)*0.01;    %FÎª1¡Áw³¤µÄÐÐÏòÁ¿
-% F = f*[exp(-j*w'*t)]';    %Ò²¿ÉÓÃÕâ¸ö£¬¸úÉÏÃæµÄµÈ¼Û
+F = f*exp(-j*t'*w)*0.01;    %Fä¸º1Ã—wé•¿çš„è¡Œå‘é‡
+% F = f*[exp(-j*w'*t)]';    %ä¹Ÿå¯ç”¨è¿™ä¸ªï¼Œè·Ÿä¸Šé¢çš„ç­‰ä»·
 subplot(1,2,1)
-plot(w, abs(F))     %Ê¹ÓÃabsº¯Êý¶ÔFÈ¡Ä£
-title('amplitude spectrum of tritangular pulses ');xlabel('\omega');ylabel('|F(\omega)|')   %¾ØÐÎ²¨µÄÆµÆ×
+plot(w, abs(F))     %ä½¿ç”¨abså‡½æ•°å¯¹Få–æ¨¡
+title('amplitude spectrum of tritangular pulses ');xlabel('\omega');ylabel('|F(\omega)|')   %çŸ©å½¢æ³¢çš„é¢‘è°±
 
-%·¨¶þ£ºÉè³öº¬²Îº¯Êý£¬ÀûÓÃÑ­»·Ëã³öF(w)
-f1 = @(t,w)(t>=-0.5 & t<=0.5).*(1-2*abs(t)).*exp(-j*w*t)   %f1(t,w)ÖÐwÎª²ÎÊý£¬tÎª×Ô±äÁ¿
+%æ³•äºŒï¼šè®¾å‡ºå«å‚å‡½æ•°ï¼Œåˆ©ç”¨å¾ªçŽ¯ç®—å‡ºF(w)
+f1 = @(t,w)(t>=-0.5 & t<=0.5).*(1-2*abs(t)).*exp(-j*w*t)   %f1(t,w)ä¸­wä¸ºå‚æ•°ï¼Œtä¸ºè‡ªå˜é‡
 N = length(w);
-F = zeros(1,N);                              %ÊÂÏÈÉèºÃÁãÏòÁ¿£¬·½±ãºóÐø´æ´¢
+F = zeros(1,N);                              %äº‹å…ˆè®¾å¥½é›¶å‘é‡ï¼Œæ–¹ä¾¿åŽç»­å­˜å‚¨
 for k=1:N
-    F(k) = integral(@(t) f1(t,w(k)),-0.5,0.5);  %f1(t,w(k))±íÊ¾²ÎÊýw=w(k)Ê±£¬¶ÔÓ¦µÄf1Öµ¡£ÔÚ[-0.5,0.5]ÉÏ»ý·Ö
+    F(k) = integral(@(t) f1(t,w(k)),-0.5,0.5);  %f1(t,w(k))è¡¨ç¤ºå‚æ•°w=w(k)æ—¶ï¼Œå¯¹åº”çš„f1å€¼ã€‚åœ¨[-0.5,0.5]ä¸Šç§¯åˆ†
 end
 subplot(1,2,2)
 plot(w,abs(F));title('amplitude spectrum of tritangular pulses ')
 xlabel('\omega');ylabel('F(\omega)');
 
 %%
-%¾í»ý°ì·¨»­³öÈý½ÇÂö³å·ù¶ÈÆ×
+%å·ç§¯åŠžæ³•ç”»å‡ºä¸‰è§’è„‰å†²å¹…åº¦è°±
 syms t w;
-f1 = sqrt(2)*(heaviside(t+0.25)-heaviside(t-0.25));     %¾ØÐÎ²¨
-F1 = fourier(f1,t,w);                                           %¾ØÐÎ²¨FT
+f1 = sqrt(2)*(heaviside(t+0.25)-heaviside(t-0.25));     %çŸ©å½¢æ³¢
+F1 = fourier(f1,t,w);                                           %çŸ©å½¢æ³¢FT
 subplot(2,2,1)
 fplot(f1,[-10,10]);      
 title('rectangular pulse');xlabel('t')
 
 subplot(2,2,2)
 fplot(abs(F1),[-50*pi,50*pi])
-title('Magnitude of rectangular pulses FT');xlabel('\omega')  %¾ØÐÎ²¨µÄÆµÆ×
+title('Magnitude of rectangular pulses FT');xlabel('\omega')  %çŸ©å½¢æ³¢çš„é¢‘è°±
 axis([-50 50 0 0.8])
 
-F2 = F1*F1                      %Èý½ÇÂö³åµÄFTµÈÓÚ¶ÔÓ¦¾ØÐÎÂö³åµÄFTµÄ³Ë»ý
+F2 = F1*F1                      %ä¸‰è§’è„‰å†²çš„FTç­‰äºŽå¯¹åº”çŸ©å½¢è„‰å†²çš„FTçš„ä¹˜ç§¯
 f2= @(t)(t>=-0.5 & t<=0.5),.*(1-2*abs(t))
 subplot(2,2,3)
 fplot(f2);      
@@ -68,7 +65,7 @@ title('Magnitude of tritangular pulses FT');xlabel('\omega')
 axis([-50 50 0 0.8])
 
 %%
-%¼ÆËãÈý½ÇÂö³åµÄFT£¬Ö±½Ó»­³öÀ´
+%è®¡ç®—ä¸‰è§’è„‰å†²çš„FTï¼Œç›´æŽ¥ç”»å‡ºæ¥
 figure
 syms w
 F = 8*(sin(0.25*w))^2/w^2
@@ -78,9 +75,9 @@ f = ifourier(F)
 fplot(f)
 
 %%
-%³éÑùÆµÂÊÓë·ù¶ÈÆ×µÄ¹ØÏµ
+%æŠ½æ ·é¢‘çŽ‡ä¸Žå¹…åº¦è°±çš„å…³ç³»
 w = -3*pi:0.001:3*pi;
-%²ÉÑùÆµÂÊÎª2Hz
+%é‡‡æ ·é¢‘çŽ‡ä¸º2Hz
 t = -100:0.5:100;
 f31 = sin(0.8*pi*t);
 subplot(3,2,1)
@@ -91,12 +88,12 @@ xlabel('t');ylabel('f[t]');
 
 F31 = f31*[exp(-j*w'*t)]';
 subplot(3,2,2)
-plot(w/pi,abs(F31))         %ÕâÀïÁî×ø±êÖáÎªw/pi£¬ÒÔ±ã¸üºÃµØ¹Û²ìwÓë·ù¶ÈÆ×·ù¶ÈµÄ¶ÔÓ¦¹ØÏµ
+plot(w/pi,abs(F31))         %è¿™é‡Œä»¤åæ ‡è½´ä¸ºw/piï¼Œä»¥ä¾¿æ›´å¥½åœ°è§‚å¯Ÿwä¸Žå¹…åº¦è°±å¹…åº¦çš„å¯¹åº”å…³ç³»
 axis([-3 3 0 20])
 title('amplitude spectrum with sampling freq = 2Hz')
 xlabel('\omega in unit pi');ylabel('|F(\omega)|');
 
-%³éÑùÆµÂÊÎª0.8Hz
+%æŠ½æ ·é¢‘çŽ‡ä¸º0.8Hz
 t = 0.625:1.25:100;
 f32 = sin(0.8*pi*t);
 subplot(3,2,3)
@@ -111,7 +108,7 @@ plot(w/pi,abs(F32));axis([-3 3 0 20]);
 title('amplitude spectrum with sampling freq = 0.8Hz')
 xlabel('\omega in unit pi');ylabel('|F(\omega)|');
 
-%³éÑùÆµÂÊÎª0.4Hz
+%æŠ½æ ·é¢‘çŽ‡ä¸º0.4Hz
 t = 0.625:2.5:100;
 f33 = sin(0.8*pi*t);
 subplot(3,2,5)
@@ -127,8 +124,8 @@ title('amplitude spectrum with sampling freq = 0.4Hz')
 xlabel('\omega in unit pi');ylabel('|F(\omega)|');
 
 %%
-%³éÑùÆµÂÊÏàÍ¬£¬³éÑùµã²»Í¬¶Ô·ù¶ÈÆ×µÄÓ°Ïì
-%³éÑùÆµÂÊÎª0.8Hz
+%æŠ½æ ·é¢‘çŽ‡ç›¸åŒï¼ŒæŠ½æ ·ç‚¹ä¸åŒå¯¹å¹…åº¦è°±çš„å½±å“
+%æŠ½æ ·é¢‘çŽ‡ä¸º0.8Hz
 t = 0:1.25:20;
 f32 = sin(0.8*pi*t);
 subplot(2,2,1)
@@ -158,8 +155,8 @@ title('amplitude spectrum with sampling freq = 0.8 Hz')
 xlabel('\omega in unit pi');ylabel('|F(\omega)|');
 
 %%
-%³éÑùÆµÂÊÓëÆµÆ×µÄ¹ØÏµ£¬¹Û²ì»ìµþÏÖÏó(¡ø·ÇÊµÑéÄÚÈÝ£¡)
-%³éÑùÆµÂÊÎª1Hz
+%æŠ½æ ·é¢‘çŽ‡ä¸Žé¢‘è°±çš„å…³ç³»ï¼Œè§‚å¯Ÿæ··å çŽ°è±¡(â–²éžå®žéªŒå†…å®¹ï¼)
+%æŠ½æ ·é¢‘çŽ‡ä¸º1Hz
 t = 0.625:1:20;
 f31 = sin(0.8*pi*t);
 subplot(4,2,1)
@@ -174,7 +171,7 @@ axis([-3 3 0 20])
 title('amplitude spectrum with sampling freq = 1Hz')
 xlabel('\omega in unit pi');ylabel('|F(\omega)|');
 
-%³éÑùÆµÂÊÎª0.91Hz
+%æŠ½æ ·é¢‘çŽ‡ä¸º0.91Hz
 t = 0.625:1.1:20;
 f31 = sin(0.8*pi*t);
 subplot(4,2,3)
@@ -189,7 +186,7 @@ axis([-3 3 0 20])
 title('amplitude spectrum with sampling freq = 0.91 Hz')
 xlabel('\omega in unit pi');ylabel('|F(\omega)|');
 
-%³éÑùÆµÂÊÎª0.83Hz
+%æŠ½æ ·é¢‘çŽ‡ä¸º0.83Hz
 t = 0.625:1.2:20;
 f31 = sin(0.8*pi*t);
 subplot(4,2,5)
@@ -204,7 +201,7 @@ axis([-3 3 0 20])
 title('amplitude spectrum with sampling freq = 0.83 Hz')
 xlabel('\omega in unit pi');ylabel('|F(\omega)|');
 
-%³éÑùÆµÂÊÎª0.8Hz
+%æŠ½æ ·é¢‘çŽ‡ä¸º0.8Hz
 t = 0.625:1.25:20;
 f31 = sin(0.8*pi*t);
 subplot(4,2,7)
@@ -221,8 +218,8 @@ xlabel('\omega in unit pi');ylabel('|F(\omega)|');
 
 
 %%
-%¾ØÐÎ²¨µÄ·ù¶ÈÆ×ÓëÏàÎ»Æ×
-%ÐÅºÅÖÜÆÚ 10£¬ÐÅºÅ¿í¶È 1¡£
+%çŸ©å½¢æ³¢çš„å¹…åº¦è°±ä¸Žç›¸ä½è°±
+%ä¿¡å·å‘¨æœŸ 10ï¼Œä¿¡å·å®½åº¦ 1ã€‚
 tau = 1
 T = 10
 E = 1
@@ -232,55 +229,55 @@ n = 1:20;
 a0 = E*tau/T
 an = E*tau*w*sinc(n*w*tau/2/pi)/pi;
 subplot(3,2,1)
-stem([0,n],[a0,abs(an)])                 %»­³ö¾ØÐÎ²¨µÄ·ù¶ÈÆ×£¨ÀëÉ¢£©
+stem([0,n],[a0,abs(an)])                 %ç”»å‡ºçŸ©å½¢æ³¢çš„å¹…åº¦è°±ï¼ˆç¦»æ•£ï¼‰
 hold on
-plot(n,abs(an),'--')                     %ÓÃÐéÏß»­³ö°üÂç
+plot(n,abs(an),'--')                     %ç”¨è™šçº¿ç”»å‡ºåŒ…ç»œ
 hold off
 title('amplitude spectrum of rectangular wave')
 xlabel('\omega');ylabel('|c_n|')
 axis([0 20 0 0.4])
 
 subplot(3,2,2)
-stem([0,n],[angle([a0,an])])                %»­³ö¾ØÐÎ²¨µÄÏàÎ»Æ×
+stem([0,n],[angle([a0,an])])                %ç”»å‡ºçŸ©å½¢æ³¢çš„ç›¸ä½è°±
 title('phase spectrum of rectangular wave')
 xlabel('\omega');ylabel('\phi_n')
 
-%ÐÅºÅÖÜÆÚ 10£¬ÐÅºÅ¿í¶È 2¡£
+%ä¿¡å·å‘¨æœŸ 10ï¼Œä¿¡å·å®½åº¦ 2ã€‚
 tau = 2
 T = 10
 w = 2*pi/T
 a0 = E*tau/T
 an = E*tau*w*sinc(n*w*tau/2/pi)/pi;
 subplot(3,2,3)
-stem([0,n],[a0,abs(an)])        %»­³ö¾ØÐÎ²¨µÄ·ù¶ÈÆ×£¨ÀëÉ¢£©
+stem([0,n],[a0,abs(an)])        %ç”»å‡ºçŸ©å½¢æ³¢çš„å¹…åº¦è°±ï¼ˆç¦»æ•£ï¼‰
 hold on
-plot(n,abs(an),'--')            %ÓÃÐéÏß»­³ö°üÂç
+plot(n,abs(an),'--')            %ç”¨è™šçº¿ç”»å‡ºåŒ…ç»œ
 hold off
 title('amplitude spectrum of rectangular wave')
 xlabel('\omega');ylabel('|c_n|')
 axis([0 20 0 0.4])
 
 subplot(3,2,4)
-stem([0,n],[angle([a0,an])])                %»­³ö¾ØÐÎ²¨µÄÏàÎ»Æ×
+stem([0,n],[angle([a0,an])])                %ç”»å‡ºçŸ©å½¢æ³¢çš„ç›¸ä½è°±
 title('phase spectrum of rectangular wave')
 xlabel('\omega');ylabel('\phi_n')
 
-%ÐÅºÅÖÜÆÚ 5£¬ÐÅºÅ¿í¶È 1¡£
+%ä¿¡å·å‘¨æœŸ 5ï¼Œä¿¡å·å®½åº¦ 1ã€‚
 tau = 1
 T = 5
 w = 2*pi/T
 a0 = E*tau/T
 an = E*tau*w*sinc(n*w*tau/2/pi)/pi;
 subplot(3,2,5)
-stem([0,n],[a0,abs(an)])        %»­³ö¾ØÐÎ²¨µÄ·ù¶ÈÆ×£¨ÀëÉ¢£©
+stem([0,n],[a0,abs(an)])        %ç”»å‡ºçŸ©å½¢æ³¢çš„å¹…åº¦è°±ï¼ˆç¦»æ•£ï¼‰
 hold on
-plot(n,abs(an),'--')            %ÓÃÐéÏß»­³ö°üÂç
+plot(n,abs(an),'--')            %ç”¨è™šçº¿ç”»å‡ºåŒ…ç»œ
 hold off
 title('amplitude spectrum of rectangular wave')
 xlabel('\omega');ylabel('|c_n|')
 axis([0 20 0 0.4])
 
 subplot(3,2,6)
-stem([0,n],[angle([a0,an])])                %»­³ö¾ØÐÎ²¨µÄÏàÎ»Æ×
+stem([0,n],[angle([a0,an])])                %ç”»å‡ºçŸ©å½¢æ³¢çš„ç›¸ä½è°±
 title('phase spectrum of rectangular wave')
 xlabel('\omega');ylabel('\phi_n')
